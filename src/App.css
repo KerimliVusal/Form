@@ -1,38 +1,79 @@
+body{
+  margin: 0;
+  padding: 0;
+}
 .App {
+  margin: 0;
+  padding: 0;
+  background-color: rgb(255, 255, 255);
   text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
   display: flex;
-  flex-direction: column;
+  height: 100vh;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+}
+.formContainer{
+  background: rgb(243, 243, 243);
+margin-top: 5px;
+box-shadow: -1px 1px 3px 3px rgb(146, 146, 146);
+height: 530px;
+}
+.Input{
+  border: 2px solid rgb(106, 106, 106);
+  background-color: rgb(255, 255, 255);
+  width: 550px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  overflow: hidden;
+
 }
 
-.App-link {
-  color: #61dafb;
-}
+.custom-input-class{
+border: none;
+overflow: hidden;
+width: 70%;
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+}
+.custom-input-class:focus{
+  border-color: #ffffff; 
+  box-shadow: 0 0 0 2px #ffffff;
+  overflow: hidden;
+}
+.error{
+  color: #d60505;
+  padding: 3px;
+  font-size: 24px;
+  margin-right: 10px;
+}
+.correct{
+color: #45bd05;
+padding: 3px;
+font-size: 24px;
+margin-right: 10px;
+
+
+}
+.inputError{
+  border: 2px solid red;
+}
+.inputCorrect{
+  border: 2px solid rgb(2, 189, 30);
+}
+.erorrText{
+  position: absolute;
+  right: -230px;
+  white-space: pre-wrap;
+  color: red;
+}
+.errorMessage{
+  border: 2px solid red;
+  height: 60px;
+  width: 43%;
+  color: #d60505;
+  position: absolute;
+  top: 20px;
+
+
 }
