@@ -4,11 +4,13 @@ import { Form, Button, Row, Col, Space } from 'antd';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useMount } from 'ahooks'
+import { toast } from 'react-toastify';
 import '../../App.css'
 import Inputs from '../../components/Input';
 
 const SubmitForm = () => {
     const [data, setData] = useState(false)
+    const [reset,setReset] = useState(false)
     const [mount, Mount] = useState(false)
     // Yup schema for form validation
     const schema = yup.object().shape({
@@ -29,17 +31,25 @@ const SubmitForm = () => {
     // Form submission handler
     const onSubmit = (data) => {
         setData(true)
+        toast.success('Contact is created!', {
+            position: toast.POSITION.TOP_RIGHT
+        });
+        setReset(false)
+        // Mount(true)
+
     };
     const handleReset=()=>{
-        methods.clearErrors()
         methods.reset()
+        methods.control._resetDefaultValues()
         setData(false)
-        Mount(false)
-
+        // Mount(false)
+        setData(false)
+        setReset(true)
+        window.location.reload();
     }
     return (
         <FormProvider  {...methods}>
-            {mount&&!data?<span className='errorMessage'><p>One of the fields is incorrect or invalid.Please follow the example in order to continue</p></span>:''
+            {!reset&&mount&&!data?<span className='errorMessage'><p>One of the fields is incorrect or invalid.Please follow the example in order to continue</p></span>:''
 }
             <form onSubmit={methods.handleSubmit(onSubmit)} style={{ width: '600px', margin: 'auto', padding: '10px 30px 10px 50px' }} className='formContainer'>
                 <Row gutter={16}>
@@ -51,28 +61,28 @@ const SubmitForm = () => {
                             <Form.Item
                                 label="First Name"
                             >
-                                <Controller control={methods.control} name='firstName' render={({ field: { onChange, value }, fieldState: { error } }) => (<Inputs onChange={onChange} error={error} mount={mount} Mount={Mount} data={data} value={value} />)} />
+                                <Controller control={methods.control} name='firstName' render={({ field: { onChange, value }, fieldState: { error } }) => (<Inputs onChange={onChange} error={error} mount={mount} Mount={Mount} data={data} value={value} reset={reset} Reset={setReset} />)} />
                             </Form.Item>
                         </Col>
                         <Col span={24}>
                             <Form.Item
                                 label="Last Name"
                             >
-                                <Controller control={methods.control} name='lastName' render={({ field: { onChange, value }, fieldState: { error } }) => (<Inputs onChange={onChange} error={error} mount={mount} Mount={Mount} data={data} value={value} />)} />
+                                <Controller control={methods.control} name='lastName' render={({ field: { onChange, value }, fieldState: { error } }) => (<Inputs onChange={onChange} error={error} mount={mount} Mount={Mount} data={data} value={value} reset={reset} Reset={setReset} />)} />
                             </Form.Item>
                         </Col>
                         <Col span={24}>
                             <Form.Item
                                 label="Email"
                             >
-                                <Controller control={methods.control} name='email' render={({ field: { onChange, value }, fieldState: { error } }) => (<Inputs onChange={onChange} error={error} mount={mount} Mount={Mount} data={data} value={value} />)} />
+                                <Controller control={methods.control} name='email' render={({ field: { onChange, value }, fieldState: { error } }) => (<Inputs onChange={onChange} error={error} mount={mount} Mount={Mount} data={data} value={value} reset={reset} Reset={setReset} />)} />
                             </Form.Item>
                         </Col>
                         <Col span={24}>
                             <Form.Item
                                 label="Phone Number"
                             >
-                                <Controller control={methods.control} name='phoneNumber' render={({ field: { onChange, value }, fieldState: { error } }) => (<Inputs onChange={onChange} error={error} mount={mount} Mount={Mount} data={data} value={value} />)} />
+                                <Controller control={methods.control} name='phoneNumber' render={({ field: { onChange, value }, fieldState: { error } }) => (<Inputs onChange={onChange} error={error} mount={mount} Mount={Mount} data={data} value={value} reset={reset} Reset={setReset} />)} />
                             </Form.Item>
                         </Col>
 
